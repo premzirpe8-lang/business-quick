@@ -2,1242 +2,916 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="theme-color" content="#090b24">
-<link rel="manifest" href="manifest.json">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
-<title>Coin Catcher 10</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Quick - Smart Business Management</title>
 
 <style>
 *{
-  box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
+box-sizing:border-box;
 }
 
 body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:linear-gradient(135deg,#090b24,#15195c,#071b31);
-  color:white;
-  min-height:100vh;
-  overflow:hidden;
+margin:0;
+font-family:Arial,sans-serif;
+background:#f3f4f6;
+color:#111827;
 }
 
-button{
-  border:0;
-  border-radius:14px;
-  padding:14px 20px;
-  margin:6px;
-  font-size:16pxindex.html वर long press कर.index.html वर long press कर.index.html वर long press कर.index.html वर long press कर.index.html वर long press कर.
-  font-weight:bold;
-  color:white;
-  background:linear-gradient(135deg,#6c5ce7,#00b894);
-  box-shadow:0 5px 15px #0006;
+header{
+background:#111827;
+color:white;
+padding:18px;
+text-align:center;
 }
 
-button:active{
-  transform:scale(.94);
-}
-
-.screen{
-  display:none;
-  width:100%;
-  min-height:100vh;
-  padding:20px;
-  text-align:center;
-  overflow:auto;
-}
-
-.active{
-  display:block;
-}
-
-h1{
-  font-size:38px;
-  margin:20px 0 8px;
-  text-shadow:0 0 20px #00eaff;
-}
-
-h2{
-  margin:10px;
-}
-
-.logo{
-  font-size:70px;
-  margin-top:35px;
-  animation:float 2s infinite ease-in-out;
-}
-
-@keyframes float{
-  50%{transform:translateY(-10px) rotate(5deg)}
-}
-
-.subtitle{
-  color:#b8c7ff;
-  margin-bottom:25px;
+.container{
+max-width:900px;
+margin:auto;
+padding:15px;
 }
 
 .card{
-  max-width:500px;
-  margin:12px auto;
-  padding:18px;
-  border-radius:20px;
-  background:#ffffff12;
-  border:1px solid #ffffff20;
-  backdrop-filter:blur(10px);
+background:white;
+padding:18px;
+margin:15px 0;
+border-radius:14px;
+box-shadow:0 3px 12px rgba(0,0,0,.08);
 }
 
-.stats{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
+input,select{
+width:100%;
+padding:12px;
+margin:7px 0;
+border:1px solid #d1d5db;
+border-radius:8px;
+font-size:15px;
+}
+
+button{
+border:0;
+padding:11px 15px;
+border-radius:8px;
+background:#2563eb;
+color:white;
+font-size:15px;
+margin:5px 3px;
+cursor:pointer;
+}
+
+button.delete{
+background:#dc2626;
+}
+
+button.green{
+background:#16a34a;
+}
+
+button.gray{
+background:#4b5563;
+}
+
+.hidden{
+display:none;
 }
 
 .stat{
-  background:#0005;
-  padding:14px;
-  border-radius:15px;
+display:inline-block;
+width:30%;
+margin:1%;
+padding:15px;
+background:#eef2ff;
+border-radius:10px;
+text-align:center;
 }
 
-.stat b{
-  display:block;
-  font-size:24px;
-  color:#00eaff;
+.product,.customer{
+border:1px solid #e5e7eb;
+padding:12px;
+margin:8px 0;
+border-radius:9px;
 }
 
-.menuBtn{
-  display:block;
-  width:90%;
-  max-width:350px;
-  margin:12px auto;
+.invoice{
+border:1px solid #ddd;
+padding:18px;
+border-radius:10px;
+background:#fff;
 }
 
-.difficulty button{
-  font-size:14px;
-  padding:10px;
+hr{
+border:0;
+border-top:1px solid #ddd;
+margin:18px 0;
 }
 
-.selected{
-  outline:3px solid #00eaff;
+@media(max-width:600px){
+.stat{
+width:100%;
+margin:5px 0;
 }
-
-#game{
-  padding:0;
-  position:relative;
-  overflow:hidden;
-}
-
-#topbar{
-  position:absolute;
-  top:0;
-  left:0;
-  right:0;
-  z-index:10;
-  display:flex;
-  justify-content:space-around;
-  padding:12px 5px;
-  background:#0008;
-  backdrop-filter:blur(8px);
-}
-
-.info{
-  font-size:14px;
-}
-
-.info b{
-  color:#00eaff;
-  font-size:18px;
-}
-
-#arena{
-  position:absolute;
-  top:58px;
-  bottom:0;
-  left:0;
-  right:0;
-  overflow:hidden;
-  background:
-    radial-gradient(circle at 20% 20%,#342e88 0,transparent 25%),
-    radial-gradient(circle at 80% 70%,#005a72 0,transparent 25%),
-    #070b22;
-}
-
-.item{
-  position:absolute;
-  width:58px;
-  height:58px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:38px;
-  cursor:pointer;
-  user-select:none;
-  filter:drop-shadow(0 0 10px #fff6);
-  animation:pop .18s ease-out;
-}
-
-@keyframes pop{
-  from{transform:scale(.2);opacity:0}
-  to{transform:scale(1);opacity:1}
-}
-
-.coin{
-  text-shadow:0 0 15px gold;
-}
-
-.diamond{
-  text-shadow:0 0 15px #00eaff;
-}
-
-.bomb{
-  text-shadow:0 0 15px red;
-}
-
-.power{
-  text-shadow:0 0 18px white;
-}
-
-#pauseBtn{
-  position:absolute;
-  right:8px;
-  top:70px;
-  z-index:20;
-  padding:8px 13px;
-  font-size:14px;
-}
-
-.overlay{
-  position:absolute;
-  inset:0;
-  z-index:30;
-  background:#020414dd;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  padding:20px;
-}
-
-.overlay.show{
-  display:flex;
-}
-
-.resultBox{
-  width:90%;
-  max-width:400px;
-  padding:25px;
-  border-radius:25px;
-  background:#101637;
-  box-shadow:0 0 30px #00eaff33;
-}
-
-.bigScore{
-  font-size:50px;
-  color:#ffd32a;
-  margin:10px;
-}
-
-.progress{
-  height:12px;
-  background:#0008;
-  border-radius:10px;
-  overflow:hidden;
-  margin:8px 0 15px;
-}
-
-.progress span{
-  display:block;
-  height:100%;
-  background:linear-gradient(90deg,#00eaff,#00ff88);
-  width:0%;
-}
-
-.skin{
-  display:inline-block;
-  width:130px;
-  margin:6px;
-  padding:15px 5px;
-  background:#0005;
-  border-radius:16px;
-}
-
-.skinIcon{
-  font-size:35px;
-}
-
-.lock{
-  opacity:.5;
-}
-
-.mission{
-  text-align:left;
-  background:#0004;
-  padding:12px;
-  border-radius:14px;
-  margin:10px 0;
-}
-
-.achievement{
-  text-align:left;
-  padding:12px;
-  margin:8px 0;
-  border-radius:14px;
-  background:#0004;
-}
-
-.unlocked{
-  border:1px solid #00ff88;
-}
-
-.locked{
-  opacity:.45;
-}
-
-.settingRow{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:15px 5px;
-  border-bottom:1px solid #ffffff15;
-}
-
-.toggle{
-  padding:8px 14px;
-}
-
-#toast{
-  position:fixed;
-  left:50%;
-  bottom:25px;
-  transform:translateX(-50%) translateY(100px);
-  background:#111a35;
-  border:1px solid #00eaff;
-  padding:12px 20px;
-  border-radius:30px;
-  z-index:100;
-  transition:.3s;
-}
-
-#toast.show{
-  transform:translateX(-50%) translateY(0);
-}
-
-.footer{
-  color:#8290bd;
-  margin-top:25px;
-  font-size:12px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- HOME -->
-<section id="home" class="screen active">
-  <div class="logo">🪙</div>
-  <h1>COIN CATCHER</h1>
-  <div class="subtitle">FINAL EDITION • VERSION 10</div>
+<header>
+<h1>Business Quick 🚀</h1>
+<p>Smart Business Management</p>
+</header>
 
-  <div class="card">
-    <div class="stats">
-      <div class="stat">🏆 Best<b id="homeBest">0</b></div>
-      <div class="stat">🪙 Coins<b id="homeCoins">0</b></div>
-      <div class="stat">🎮 Games<b id="homeGames">0</b></div>
-      <div class="stat">⭐ Level<b id="homeLevel">1</b></div>
-    </div>
-  </div>
+<div class="container">
 
-  <button class="menuBtn" onclick="startGame()">🎮 PLAY GAME</button>
-  <button class="menuBtn" onclick="showScreen('shop')">🏪 SKIN SHOP</button>
-  <button class="menuBtn" onclick="showScreen('missions')">🎯 MISSIONS</button>
-  <button class="menuBtn" onclick="showScreen('achievements')">🏆 ACHIEVEMENTS</button>
-  <button class="menuBtn" onclick="showScreen('stats')">📊 PLAYER STATS</button>
-  <button class="menuBtn" onclick="showScreen('settings')">⚙️ SETTINGS</button>
-  <button class="menuBtn" onclick="showScreen('tutorial')">📖 HOW TO PLAY</button>
+<!-- LOGIN -->
 
-  <div class="footer">Catch • Dodge • Level Up 🚀</div>
-</section>
+<div id="loginPage" class="card">
+<h2>🔐 Login</h2>
 
-<!-- GAME -->
-<section id="game" class="screen">
+<input id="username" placeholder="Username">
 
-  <div id="topbar">
-    <div class="info">⭐ Score<br><b id="score">0</b></div>
-    <div class="info">🏆 Best<br><b id="best">0</b></div>
-    <div class="info">❤️ Lives<br><b id="lives">3</b></div>
-    <div class="info">🔥 Combo<br><b id="combo">0</b></div>
-    <div class="info">⏱️ Time<br><b id="time">30</b></div>
-    <div class="info">⭐ Lv<br><b id="level">1</b></div>
-  </div>
+<input id="password" type="password" placeholder="Password">
 
-  <button id="pauseBtn" onclick="pauseGame()">⏸️</button>
+<button onclick="login()">🚀 Login to Business Quick</button>
+</div>
 
-  <div id="arena"></div>
 
-  <div id="pauseOverlay" class="overlay">
-    <div class="resultBox">
-      <h2>⏸️ GAME PAUSED</h2>
-      <button onclick="resumeGame()">▶️ RESUME</button>
-      <button onclick="quitGame()">🏠 QUIT</button>
-    </div>
-  </div>
+<!-- APP -->
 
-  <div id="gameOver" class="overlay">
-    <div class="resultBox">
-      <h2>🏁 GAME OVER</h2>
-      <div class="bigScore" id="finalScore">0</div>
-      <p id="resultText">Great Game!</p>
-      <p>🪙 Coins Collected: <b id="earned">0</b></p>
-      <p>🔥 Best Combo: <b id="finalCombo">0</b></p>
-      <button onclick="startGame()">🔄 PLAY AGAIN</button>
-      <button onclick="showScreen('home')">🏠 HOME</button>
-    </div>
-  </div>
-</section>
+<div id="app" class="hidden">
 
-<!-- SHOP -->
-<section id="shop" class="screen">
-  <h2>🏪 SKIN SHOP</h2>
-  <div class="card">
-    🪙 Your Coins: <b id="shopCoins">0</b>
-  </div>
+<div class="card">
+<button onclick="showSection('dashboard')">📊 Dashboard</button>
+<button onclick="showSection('products')">📦 Products</button>
+<button onclick="showSection('customers')">👤 Customers</button>
+<button onclick="showSection('invoice')">🧾 Invoice</button>
+<button class="gray" onclick="logout()">Logout</button>
+</div>
 
-  <div id="skins"></div>
 
-  <button onclick="showScreen('home')">🏠 HOME</button>
-</section>
+<!-- DASHBOARD -->
 
-<!-- MISSIONS -->
-<section id="missions" class="screen">
-  <h2>🎯 DAILY MISSIONS</h2>
+<div id="dashboard" class="section">
 
-  <div class="card">
-    <div class="mission">
-      🪙 Collect 20 Coins
-      <div class="progress"><span id="m1bar"></span></div>
-      <small id="m1text">0 / 20</small>
-    </div>
+<div class="card">
+<h2>📊 Business Dashboard</h2>
 
-    <div class="mission">
-      💎 Collect 3 Diamonds
-      <div class="progress"><span id="m2bar"></span></div>
-      <small id="m2text">0 / 3</small>
-    </div>
+<div class="stat">
+<strong id="productCount">0</strong>
+<br>Products
+</div>
 
-    <div class="mission">
-      🔥 Reach 10 Combo
-      <div class="progress"><span id="m3bar"></span></div>
-      <small id="m3text">0 / 10</small>
-    </div>
+<div class="stat">
+<strong id="customerCount">0</strong>
+<br>Customers
+</div>
 
-    <div class="mission">
-      ⭐ Score 50 Points
-      <div class="progress"><span id="m4bar"></span></div>
-      <small id="m4text">0 / 50</small>
-    </div>
-  </div>
+<div class="stat">
+<strong id="salesTotal">₹0</strong>
+<br>Sales
+</div>
 
-  <button onclick="showScreen('home')">🏠 HOME</button>
-</section>
+<div class="stat">
+<strong id="profitTotal">₹0</strong>
+<br>Profit
+</div>
 
-<!-- ACHIEVEMENTS -->
-<section id="achievements" class="screen">
-  <h2>🏆 ACHIEVEMENTS</h2>
-  <div id="achievementList" class="card"></div>
-  <button onclick="showScreen('home')">🏠 HOME</button>
-</section>
+</div>
 
-<!-- STATS -->
-<section id="stats" class="screen">
-  <h2>📊 PLAYER STATS</h2>
+</div>
 
-  <div class="card">
-    <div class="stats">
-      <div class="stat">🏆 Best Score<b id="sBest">0</b></div>
-      <div class="stat">🪙 Total Coins<b id="sCoins">0</b></div>
-      <div class="stat">🎮 Games<b id="sGames">0</b></div>
-      <div class="stat">💎 Diamonds<b id="sDiamonds">0</b></div>
-      <div class="stat">🔥 Best Combo<b id="sCombo">0</b></div>
-      <div class="stat">💣 Bombs Hit<b id="sBombs">0</b></div>
-    </div>
-  </div>
 
-  <button onclick="showScreen('home')">🏠 HOME</button>
-</section>
+<!-- PRODUCTS -->
 
-<!-- SETTINGS -->
-<section id="settings" class="screen">
-  <h2>⚙️ SETTINGS</h2>
+<div id="products" class="section hidden">
 
-  <div class="card">
-    <div class="settingRow">
-      <span>🔊 Sound</span>
-      <button class="toggle" id="soundBtn" onclick="toggleSound()">ON</button>
-    </div>
+<div class="card">
+<h2>📦 Product Management</h2>
 
-    <div class="settingRow">
-      <span>📳 Vibration</span>
-      <button class="toggle" id="vibrationBtn" onclick="toggleVibration()">ON</button>
-    </div>
+<input id="productName" placeholder="Product name">
 
-    <div class="settingRow">
-      <span>🗑️ Reset Progress</span>
-      <button onclick="resetProgress()">RESET</button>
-    </div>
-  </div>
+<input id="productPrice" type="number" placeholder="Selling price">
 
-  <button onclick="showScreen('home')">🏠 HOME</button>
-</section>
+<input id="productStock" type="number" placeholder="Stock">
 
-<!-- TUTORIAL -->
-<section id="tutorial" class="screen">
-  <h2>📖 HOW TO PLAY</h2>
+<button onclick="addProduct()">➕ Add Product</button>
 
-  <div class="card">
-    <p>🪙 <b>Coin</b> = +1 point</p>
-    <p>💎 <b>Diamond</b> = +5 points</p>
-    <p>💣 <b>Bomb</b> = Lose 1 life</p>
-    <p>🛡️ <b>Shield</b> = Protect yourself</p>
-    <p>⚡ <b>Speed</b> = Temporary speed boost</p>
-    <p>❤️ <b>Heart</b> = +1 life</p>
-    <p>🔥 Consecutive catches increase your combo.</p>
-    <p>⭐ Every level makes the game harder.</p>
-    <p>⏱️ You have 30 seconds.</p>
-  </div>
+<input id="productSearch" placeholder="🔍 Search product" oninput="displayProducts()">
 
-  <button onclick="showScreen('home')">🏠 HOME</button>
-</section>
+<div id="productList"></div>
+</div>
 
-<div id="toast"></div>
+</div>
+
+
+<!-- CUSTOMERS -->
+
+<div id="customers" class="section hidden">
+
+<div class="card">
+<h2>👤 Customer Management</h2>
+
+<input id="customerName" placeholder="Customer name">
+
+<input id="customerPhone" placeholder="Phone number">
+
+<button onclick="addCustomer()">➕ Add New Customer</button>
+
+<div id="customerList"></div>
+</div>
+
+</div>
+
+
+<!-- INVOICE -->
+
+<div id="invoice" class="section hidden">
+
+<div class="card">
+
+<h2>🧾 Invoice Management</h2>
+
+<input id="invoiceCustomer" placeholder="Customer name">
+
+<input id="invoiceProduct" placeholder="Product name">
+
+<input id="invoiceQuantity" type="number" placeholder="Quantity">
+
+<select id="paymentStatus">
+<option value="Paid">Paid</option>
+<option value="Pending">Pending</option>
+</select>
+
+<input id="invoicePrice" type="number" placeholder="Selling price">
+
+<input id="invoiceCost" type="number" placeholder="Cost price">
+
+<button onclick="createInvoice()">🧾 Create Invoice</button>
+
+<div id="invoiceResult"></div>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
 
 <script>
-/* =========================
-   SAVE DATA
-========================= */
 
-let data = JSON.parse(localStorage.getItem("coinCatcher10")) || {
-  best:0,
-  coins:0,
-  games:0,
-  diamonds:0,
-  bombs:0,
-  bestCombo:0,
-  sound:true,
-  vibration:true,
-  skin:"classic",
-  skins:{
-    classic:true,
-    blue:false,
-    fire:false,
-    galaxy:false
-  },
-  missions:{
-    coins:0,
-    diamonds:0,
-    combo:0,
-    score:0
-  },
-  achievements:[]
+let products =
+JSON.parse(localStorage.getItem("products") || "[]");
+
+let customers =
+JSON.parse(localStorage.getItem("customers") || "[]");
+
+let sales =
+JSON.parse(localStorage.getItem("sales") || "[]");
+
+let currentInvoice = "";
+
+
+/* LOGIN */
+
+function login(){
+
+let username =
+document.getElementById("username").value;
+
+let password =
+document.getElementById("password").value;
+
+if(username === "admin" && password === "1234"){
+
+document.getElementById("loginPage")
+.classList.add("hidden");
+
+document.getElementById("app")
+.classList.remove("hidden");
+
+updateDashboard();
+
+}else{
+
+alert("Wrong username or password");
+
+}
+
+}
+
+
+/* LOGOUT */
+
+function logout(){
+
+document.getElementById("app")
+.classList.add("hidden");
+
+document.getElementById("loginPage")
+.classList.remove("hidden");
+
+}
+
+
+/* SECTIONS */
+
+function showSection(id){
+
+document.querySelectorAll(".section")
+.forEach(function(section){
+
+section.classList.add("hidden");
+
+});
+
+document.getElementById(id)
+.classList.remove("hidden");
+
+updateDashboard();
+
+}
+
+
+/* PRODUCT */
+
+function addProduct(){
+
+let name =
+document.getElementById("productName").value;
+
+let price =
+Number(document.getElementById("productPrice").value);
+
+let stock =
+Number(document.getElementById("productStock").value);
+
+if(!name || !price){
+
+alert("Enter product name and price");
+
+return;
+
+}
+
+products.push({
+name:name,
+price:price,
+stock:stock
+});
+
+localStorage.setItem(
+"products",
+JSON.stringify(products)
+);
+
+document.getElementById("productName").value="";
+document.getElementById("productPrice").value="";
+document.getElementById("productStock").value="";
+
+displayProducts();
+updateDashboard();
+
+}
+
+
+/* DISPLAY PRODUCTS */
+
+function displayProducts(){
+
+let search =
+document.getElementById("productSearch").value
+.toLowerCase();
+
+let html="";
+
+products.forEach(function(product,index){
+
+if(product.name.toLowerCase().includes(search)){
+
+html += `
+
+<div class="product">
+
+<strong>${product.name}</strong>
+
+<br>
+Price: ₹${product.price}
+
+<br>
+Stock: ${product.stock}
+
+<br>
+
+<button onclick="editProduct(${index})">
+✏️ Edit
+</button>
+
+<button class="delete"
+onclick="deleteProduct(${index})">
+🗑️ Delete Product
+</button>
+
+</div>
+
+`;
+
+}
+
+});
+
+document.getElementById("productList")
+.innerHTML = html;
+
+}
+
+
+/* EDIT PRODUCT */
+
+function editProduct(index){
+
+let name =
+prompt("Product name",products[index].name);
+
+if(name === null) return;
+
+let price =
+prompt("Price",products[index].price);
+
+let stock =
+prompt("Stock",products[index].stock);
+
+products[index].name=name;
+products[index].price=Number(price);
+products[index].stock=Number(stock);
+
+localStorage.setItem(
+"products",
+JSON.stringify(products)
+);
+
+displayProducts();
+
+updateDashboard();
+
+}
+
+
+/* DELETE PRODUCT */
+
+function deleteProduct(index){
+
+if(!confirm("Delete this product?"))
+return;
+
+products.splice(index,1);
+
+localStorage.setItem(
+"products",
+JSON.stringify(products)
+);
+
+displayProducts();
+
+updateDashboard();
+
+}
+
+
+/* CUSTOMER */
+
+function addCustomer(){
+
+let name =
+document.getElementById("customerName").value;
+
+let phone =
+document.getElementById("customerPhone").value;
+
+if(!name){
+
+alert("Enter customer name");
+
+return;
+
+}
+
+customers.push({
+name:name,
+phone:phone
+});
+
+localStorage.setItem(
+"customers",
+JSON.stringify(customers)
+);
+
+document.getElementById("customerName").value="";
+document.getElementById("customerPhone").value="";
+
+displayCustomers();
+
+updateDashboard();
+
+}
+
+
+/* DISPLAY CUSTOMERS */
+
+function displayCustomers(){
+
+let html="";
+
+customers.forEach(function(customer,index){
+
+html += `
+
+<div class="customer">
+
+<strong>${customer.name}</strong>
+
+<br>
+Phone: ${customer.phone || "N/A"}
+
+<br>
+
+<button class="delete"
+onclick="deleteCustomer(${index})">
+🗑️ Delete Customer
+</button>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("customerList")
+.innerHTML=html;
+
+}
+
+
+/* DELETE CUSTOMER */
+
+function deleteCustomer(index){
+
+if(!confirm("Delete this customer?"))
+return;
+
+customers.splice(index,1);
+
+localStorage.setItem(
+"customers",
+JSON.stringify(customers)
+);
+
+displayCustomers();
+
+updateDashboard();
+
+}
+
+
+/* INVOICE */
+
+function createInvoice(){
+
+let customer =
+document.getElementById("invoiceCustomer").value;
+
+let product =
+document.getElementById("invoiceProduct").value;
+
+let quantity =
+Number(document.getElementById("invoiceQuantity").value);
+
+let paymentStatus =
+document.getElementById("paymentStatus").value;
+
+let price =
+Number(document.getElementById("invoicePrice").value);
+
+let cost =
+Number(document.getElementById("invoiceCost").value);
+
+if(!customer || !product || !quantity || !price){
+
+alert("Please fill required details");
+
+return;
+
+}
+
+let sale =
+price * quantity;
+
+let profit =
+(price - cost) * quantity;
+
+let invoiceNumber =
+"INV-" + Date.now();
+
+let invoiceDate =
+new Date().toLocaleDateString("en-IN");
+
+
+sales.push({
+
+customer:customer,
+product:product,
+sale:sale,
+profit:profit,
+status:paymentStatus
+
+});
+
+localStorage.setItem(
+"sales",
+JSON.stringify(sales)
+);
+
+
+currentInvoice =
+
+"BUSINESS QUICK\n\n"+
+"Invoice No: "+invoiceNumber+"\n"+
+"Date: "+invoiceDate+"\n\n"+
+"Customer: "+customer+"\n"+
+"Product: "+product+"\n"+
+"Quantity: "+quantity+"\n"+
+"Total: ₹"+sale+"\n"+
+"Profit: ₹"+profit+"\n"+
+"Payment Status: "+paymentStatus;
+
+
+document.getElementById("invoiceResult")
+.innerHTML = `
+
+<div class="invoice">
+
+<h2>BUSINESS QUICK</h2>
+
+<p>Smart Business Management</p>
+
+<hr>
+
+<p>
+<strong>Invoice No:</strong>
+${invoiceNumber}
+</p>
+
+<p>
+<strong>Date:</strong>
+${invoiceDate}
+</p>
+
+<p>
+<strong>Customer:</strong>
+${customer}
+</p>
+
+<p>
+<strong>Product:</strong>
+${product}
+</p>
+
+<p>
+<strong>Quantity:</strong>
+${quantity}
+</p>
+
+<p>
+<strong>Total:</strong>
+₹${sale}
+</p>
+
+<p>
+<strong>Profit:</strong>
+₹${profit}
+</p>
+
+<p>
+<strong>Payment Status:</strong>
+${paymentStatus}
+</p>
+
+<hr>
+
+<p style="text-align:center;">
+<strong>Thank you for your business! 🙏</strong>
+</p>
+
+<button onclick="printInvoice()">
+🖨️ Print / PDF
+</button>
+
+<button class="green"
+onclick="copyInvoice()">
+📋 Copy Invoice
+</button>
+
+<button class="green"
+onclick="shareWhatsApp()">
+💬 WhatsApp
+</button>
+
+</div>
+
+`;
+
+updateDashboard();
+
+}
+
+
+/* PRINT */
+
+function printInvoice(){
+
+if(!currentInvoice){
+
+alert("Generate an invoice first.");
+
+return;
+
+}
+
+let win =
+window.open("","_blank");
+
+if(!win){
+
+alert("Please allow pop-ups.");
+
+return;
+
+}
+
+win.document.write(`
+
+<html>
+
+<head>
+
+<title>Business Quick Invoice</title>
+
+<style>
+
+body{
+font-family:Arial;
+padding:30px;
+}
+
+.invoice{
+max-width:650px;
+margin:auto;
+border:1px solid #ddd;
+padding:30px;
+}
+
+h1{
+margin-bottom:5px;
+}
+
+pre{
+white-space:pre-wrap;
+font-family:Arial;
+font-size:16px;
+line-height:1.7;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="invoice">
+
+<h1>BUSINESS QUICK</h1>
+
+<p>Smart Business Management</p>
+
+<hr>
+
+<pre>${currentInvoice}</pre>
+
+<hr>
+
+<p style="text-align:center;">
+<strong>Thank you for your business! 🙏</strong>
+</p>
+
+</div>
+
+<script>
+
+window.onload=function(){
+
+window.print();
+
 };
 
-function save(){
-  localStorage.setItem("coinCatcher10",JSON.stringify(data));
+<\/script>
+
+</body>
+
+</html>
+
+`);
+
+win.document.close();
+
 }
 
-/* =========================
-   GAME VARIABLES
-========================= */
 
-let score=0;
-let lives=3;
-let combo=0;
-let bestComboGame=0;
-let timeLeft=30;
-let level=1;
+/* COPY */
 
-let gameRunning=false;
-let paused=false;
+function copyInvoice(){
 
-let spawnTimer;
-let gameTimer;
-let difficulty="normal";
+if(!currentInvoice){
 
-let shield=false;
-let speedBoost=false;
+alert("Generate an invoice first.");
 
-/* =========================
-   SCREEN
-========================= */
+return;
 
-function showScreen(id){
-  document.querySelectorAll(".screen").forEach(s=>{
-    s.classList.remove("active");
-  });
-
-  document.getElementById(id).classList.add("active");
-
-  if(id==="home") updateHome();
-  if(id==="shop") updateShop();
-  if(id==="missions") updateMissions();
-  if(id==="achievements") updateAchievements();
-  if(id==="stats") updateStats();
-  if(id==="settings") updateSettings();
 }
 
-/* =========================
-   HOME
-========================= */
+navigator.clipboard.writeText(currentInvoice);
 
-function updateHome(){
-  document.getElementById("homeBest").textContent=data.best;
-  document.getElementById("homeCoins").textContent=data.coins;
-  document.getElementById("homeGames").textContent=data.games;
-  document.getElementById("homeLevel").textContent=Math.min(10,Math.floor(data.best/20)+1);
+alert("Invoice copied!");
+
 }
 
-/* =========================
-   START GAME
-========================= */
 
-function startGame(){
+/* WHATSAPP */
 
-  showScreen("game");
+function shareWhatsApp(){
 
-  document.getElementById("gameOver").classList.remove("show");
-  document.getElementById("pauseOverlay").classList.remove("show");
+if(!currentInvoice){
 
-  document.getElementById("arena").innerHTML="";
+alert("Generate an invoice first.");
 
-  score=0;
-  lives=3;
-  combo=0;
-  bestComboGame=0;
-  timeLeft=30;
-  level=1;
+return;
 
-  shield=false;
-  speedBoost=false;
-
-  gameRunning=true;
-  paused=false;
-
-  updateGameUI();
-
-  data.games++;
-  save();
-
-  clearInterval(gameTimer);
-  clearInterval(spawnTimer);
-
-  gameTimer=setInterval(()=>{
-    if(!gameRunning || paused)return;
-
-    timeLeft--;
-
-    level=Math.min(10,Math.floor(score/10)+1);
-
-    updateGameUI();
-
-    if(timeLeft<=0){
-      endGame();
-    }
-  },1000);
-
-  spawnLoop();
 }
 
-/* =========================
-   SPAWN
-========================= */
+navigator.clipboard.writeText(currentInvoice)
+.then(function(){
 
-function spawnLoop(){
+alert(
+"Invoice copied! 📋\n\nOpen WhatsApp and paste the invoice."
+);
 
-  if(!gameRunning)return;
+})
+.catch(function(){
 
-  spawnItem();
+alert(
+"Please use the Copy Invoice button and paste it in WhatsApp."
+);
 
-  let speed=Math.max(
-    220,
-    700-(level*45)
-  );
+});
 
-  if(speedBoost)speed/=1.5;
-
-  spawnTimer=setTimeout(spawnLoop,speed);
 }
 
-function spawnItem(){
 
-  if(!gameRunning || paused)return;
+/* DASHBOARD */
 
-  const arena=document.getElementById("arena");
+function updateDashboard(){
 
-  const item=document.createElement("div");
-  item.className="item";
+document.getElementById("productCount")
+.innerText=products.length;
 
-  const r=Math.random();
+document.getElementById("customerCount")
+.innerText=customers.length;
 
-  let type;
+let salesTotal=0;
+let profitTotal=0;
 
-  if(r<0.55)type="coin";
-  else if(r<0.68)type="diamond";
-  else if(r<0.82)type="bomb";
-  else if(r<0.88)type="shield";
-  else if(r<0.94)type="speed";
-  else type="life";
+sales.forEach(function(item){
 
-  if(type==="coin"){
-    item.textContent="🪙";
-  }
+salesTotal += Number(item.sale) || 0;
 
-  if(type==="diamond"){
-    item.textContent="💎";
-  }
+profitTotal += Number(item.profit) || 0;
 
-  if(type==="bomb"){
-    item.textContent="💣";
-  }
+});
 
-  if(type==="shield"){
-    item.textContent="🛡️";
-  }
+document.getElementById("salesTotal")
+.innerText="₹"+salesTotal;
 
-  if(type==="speed"){
-    item.textContent="⚡";
-  }
+document.getElementById("profitTotal")
+.innerText="₹"+profitTotal;
 
-  if(type==="life"){
-    item.textContent="❤️";
-  }
+displayProducts();
 
-  item.classList.add(type);
+displayCustomers();
 
-  const maxX=Math.max(0,arena.clientWidth-60);
-  const maxY=Math.max(0,arena.clientHeight-75);
-
-  item.style.left=Math.random()*maxX+"px";
-  item.style.top=Math.random()*maxY+"px";
-
-  item.onclick=()=>collectItem(item,type);
-
-  arena.appendChild(item);
-
-  setTimeout(()=>{
-    if(item.parentNode)item.remove();
-  },1300);
 }
 
-/* =========================
-   COLLECT
-========================= */
 
-function collectItem(item,type){
+/* START */
 
-  if(!gameRunning || paused)return;
-
-  item.remove();
-
-  vibrate();
-
-  if(type==="coin"){
-
-    score++;
-    combo++;
-
-    data.coins++;
-    data.missions.coins++;
-
-    if(combo>bestComboGame){
-      bestComboGame=combo;
-    }
-  }
-
-  if(type==="diamond"){
-
-    score+=5;
-    combo++;
-
-    data.coins+=5;
-    data.diamonds++;
-    data.missions.diamonds++;
-
-    if(combo>bestComboGame){
-      bestComboGame=combo;
-    }
-  }
-
-  if(type==="bomb"){
-
-    if(shield){
-
-      shield=false;
-      toast("🛡️ Shield Saved You!");
-
-    }else{
-
-      lives--;
-      combo=0;
-      data.bombs++;
-
-      if(lives<=0){
-        endGame();
-        return;
-      }
-    }
-  }
-
-  if(type==="shield"){
-    shield=true;
-    toast("🛡️ Shield Activated!");
-  }
-
-  if(type==="speed"){
-    speedBoost=true;
-    toast("⚡ Speed Boost!");
-
-    setTimeout(()=>{
-      speedBoost=false;
-    },5000);
-  }
-
-  if(type==="life"){
-    lives=Math.min(5,lives+1);
-    toast("❤️ Extra Life!");
-  }
-
-  if(combo>data.bestCombo){
-    data.bestCombo=combo;
-  }
-
-  data.missions.combo=Math.max(
-    data.missions.combo,
-    combo
-  );
-
-  data.missions.score=Math.max(
-    data.missions.score,
-    score
-  );
-
-  if(score>data.best){
-    data.best=score;
-  }
-
-  save();
-  updateGameUI();
-}
-
-/* =========================
-   UI
-========================= */
-
-function updateGameUI(){
-
-  document.getElementById("score").textContent=score;
-  document.getElementById("best").textContent=data.best;
-  document.getElementById("lives").textContent=lives;
-  document.getElementById("combo").textContent=combo;
-  document.getElementById("time").textContent=timeLeft;
-  document.getElementById("level").textContent=level;
-}
-
-/* =========================
-   PAUSE
-========================= */
-
-function pauseGame(){
-
-  if(!gameRunning)return;
-
-  paused=true;
-
-  document.getElementById("pauseOverlay")
-    .classList.add("show");
-}
-
-function resumeGame(){
-
-  paused=false;
-
-  document.getElementById("pauseOverlay")
-    .classList.remove("show");
-}
-
-function quitGame(){
-
-  gameRunning=false;
-
-  clearInterval(gameTimer);
-  clearTimeout(spawnTimer);
-
-  showScreen("home");
-}
-
-/* =========================
-   END GAME
-========================= */
-
-function endGame(){
-
-  if(!gameRunning)return;
-
-  gameRunning=false;
-
-  clearInterval(gameTimer);
-  clearTimeout(spawnTimer);
-
-  document.querySelectorAll(".item")
-    .forEach(x=>x.remove());
-
-  document.getElementById("finalScore")
-    .textContent=score;
-
-  document.getElementById("earned")
-    .textContent=Math.floor(score/2);
-
-  document.getElementById("finalCombo")
-    .textContent=bestComboGame;
-
-  let text="Good Game!";
-
-  if(score>=100)text="🔥 Amazing! 100+ Score!";
-  else if(score>=50)text="⭐ Excellent Run!";
-  else if(score>=25)text="👏 Nice Catching!";
-  else text="💪 Keep Practicing!";
-
-  document.getElementById("resultText")
-    .textContent=text;
-
-  save();
-
-  checkAchievements();
-
-  document.getElementById("gameOver")
-    .classList.add("show");
-}
-
-/* =========================
-   SHOP
-========================= */
-
-const skinData=[
-  {
-    id:"classic",
-    name:"Classic",
-    icon:"🪙",
-    price:0
-  },
-  {
-    id:"blue",
-    name:"Blue",
-    icon:"🔵",
-    price:50
-  },
-  {
-    id:"fire",
-    name:"Fire",
-    icon:"🔥",
-    price:100
-  },
-  {
-    id:"galaxy",
-    name:"Galaxy",
-    icon:"🌌",
-    price:200
-  }
-];
-
-function updateShop(){
-
-  document.getElementById("shopCoins")
-    .textContent=data.coins;
-
-  const box=document.getElementById("skins");
-
-  box.innerHTML="";
-
-  skinData.forEach(s=>{
-
-    const div=document.createElement("div");
-    div.className="skin";
-
-    const unlocked=data.skins[s.id];
-
-    div.innerHTML=`
-      <div class="skinIcon">${s.icon}</div>
-      <b>${s.name}</b>
-      <p>${s.price===0?"FREE":"🪙 "+s.price}</p>
-    `;
-
-    const btn=document.createElement("button");
-
-    if(unlocked){
-
-      btn.textContent=
-        data.skin===s.id
-        ?"✅ SELECTED"
-        :"SELECT";
-
-      btn.onclick=()=>{
-        data.skin=s.id;
-        save();
-        updateShop();
-        toast("🎨 Skin Selected!");
-      };
-
-    }else{
-
-      btn.textContent="🔓 UNLOCK";
-
-      btn.onclick=()=>buySkin(s);
-    }
-
-    div.appendChild(btn);
-    box.appendChild(div);
-  });
-}
-
-function buySkin(s){
-
-  if(data.coins<s.price){
-
-    toast("❌ Not Enough Coins!");
-    return;
-  }
-
-  data.coins-=s.price;
-  data.skins[s.id]=true;
-  data.skin=s.id;
-
-  save();
-  updateShop();
-
-  toast("🎉 Skin Unlocked!");
-}
-
-/* =========================
-   MISSIONS
-========================= */
-
-function updateMissions(){
-
-  missionBar(
-    "m1",
-    data.missions.coins,
-    20
-  );
-
-  missionBar(
-    "m2",
-    data.missions.diamonds,
-    3
-  );
-
-  missionBar(
-    "m3",
-    data.missions.combo,
-    10
-  );
-
-  missionBar(
-    "m4",
-    data.missions.score,
-    50
-  );
-}
-
-function missionBar(id,value,max){
-
-  let percent=Math.min(100,(value/max)*100);
-
-  document.getElementById(id+"bar")
-    .style.width=percent+"%";
-
-  document.getElementById(id+"text")
-    .textContent=Math.min(value,max)+" / "+max;
-}
-
-/* =========================
-   ACHIEVEMENTS
-========================= */
-
-const achievementData=[
-  ["first","🎮 First Game","Play your first game"],
-  ["score25","⭐ Rising Star","Score 25 points"],
-  ["score50","🔥 Pro Catcher","Score 50 points"],
-  ["score100","👑 Coin Master","Score 100 points"],
-  ["combo10","🔥 Combo King","Reach 10 combo"],
-  ["coins100","🪙 Collector","Collect 100 coins"],
-  ["diamond10","💎 Diamond Hunter","Collect 10 diamonds"],
-  ["games10","🎮 Veteran","Play 10 games"]
-];
-
-function checkAchievements(){
-
-  let unlocked=[];
-
-  if(data.games>=1)unlocked.push("first");
-  if(data.best>=25)unlocked.push("score25");
-  if(data.best>=50)unlocked.push("score50");
-  if(data.best>=100)unlocked.push("score100");
-  if(data.bestCombo>=10)unlocked.push("combo10");
-  if(data.coins>=100)unlocked.push("coins100");
-  if(data.diamonds>=10)unlocked.push("diamond10");
-  if(data.games>=10)unlocked.push("games10");
-
-  unlocked.forEach(id=>{
-
-    if(!data.achievements.includes(id)){
-
-      data.achievements.push(id);
-
-      toast("🏆 Achievement Unlocked!");
-    }
-  });
-
-  save();
-}
-
-function updateAchievements(){
-
-  checkAchievements();
-
-  const box=document.getElementById("achievementList");
-
-  box.innerHTML="";
-
-  achievementData.forEach(a=>{
-
-    const unlocked=data.achievements.includes(a[0]);
-
-    const div=document.createElement("div");
-
-    div.className=
-      "achievement "+
-      (unlocked?"unlocked":"locked");
-
-    div.innerHTML=`
-      <b>${a[1]}</b>
-      <br>
-      <small>${a[2]}</small>
-      <br>
-      ${unlocked?"✅ UNLOCKED":"🔒 LOCKED"}
-    `;
-
-    box.appendChild(div);
-  });
-}
-
-/* =========================
-   STATS
-========================= */
-
-function updateStats(){
-
-  document.getElementById("sBest")
-    .textContent=data.best;
-
-  document.getElementById("sCoins")
-    .textContent=data.coins;
-
-  document.getElementById("sGames")
-    .textContent=data.games;
-
-  document.getElementById("sDiamonds")
-    .textContent=data.diamonds;
-
-  document.getElementById("sCombo")
-    .textContent=data.bestCombo;
-
-  document.getElementById("sBombs")
-    .textContent=data.bombs;
-}
-
-/* =========================
-   SETTINGS
-========================= */
-
-function updateSettings(){
-
-  document.getElementById("soundBtn")
-    .textContent=data.sound?"ON":"OFF";
-
-  document.getElementById("vibrationBtn")
-    .textContent=data.vibration?"ON":"OFF";
-}
-
-function toggleSound(){
-
-  data.sound=!data.sound;
-
-  save();
-  updateSettings();
-
-  toast(data.sound?"🔊 Sound ON":"🔇 Sound OFF");
-}
-
-function toggleVibration(){
-
-  data.vibration=!data.vibration;
-
-  save();
-  updateSettings();
-
-  toast(data.vibration?"📳 Vibration ON":"📴 Vibration OFF");
-}
-
-/* =========================
-   RESET
-========================= */
-
-function resetProgress(){
-
-  const ok=confirm(
-    "Are you sure you want to reset all progress?"
-  );
-
-  if(!ok)return;
-
-  localStorage.removeItem("coinCatcher10");
-
-  location.reload();
-}
-
-/* =========================
-   EFFECTS
-========================= */
-
-function vibrate(){
-
-  if(data.vibration &&
-     navigator.vibrate){
-
-    navigator.vibrate(30);
-  }
-}
-
-function toast(message){
-
-  const t=document.getElementById("toast");
-
-  t.textContent=message;
-
-  t.classList.add("show");
-
-  setTimeout(()=>{
-    t.classList.remove("show");
-  },1600);
-}
-
-/* =========================
-   INIT
-========================= */
-
-updateHome();
-updateSettings();
-updateShop();
-updateMissions();
-updateAchievements();
-updateStats();
+updateDashboard();
 
 </script>
 
